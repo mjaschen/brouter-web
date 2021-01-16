@@ -25,7 +25,7 @@
                 <span class="fa fa-bars"></span>
             </button>
             <a class="navbar-brand order-md-last" href="#" data-toggle="modal" data-target="#about"
-                >BRouter-Web <sup class="version">0.14.0</sup></a
+                >BRouter-Web <sup class="version">0.15.0</sup></a
             >
             <div class="collapse navbar-collapse" id="collapsingNavbar">
                 <div class="navbar-nav">
@@ -143,7 +143,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" data-i18n="credits">Credits</h4>
+                        <h4 class="modal-title" data-i18n="credits.title">Credits</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -167,6 +167,11 @@
                             <dd data-i18n="[html]credits.nominatim">
                                 Search by
                                 <a href="https://wiki.openstreetmap.org/wiki/Nominatim" target="_blank">Nominatim</a>
+                            </dd>
+                            <dd data-i18n="[html]credits.boundaries">
+                                Administrative Boundaries:
+                                <a href="https://osm-boundaries.com" target="_blank">OSM-Boundaries</a>,
+                                <a href="https://overpass-api.de/" target="_blank">Overpass API</a>
                             </dd>
                             <dt data-i18n="credits.elevation-data">Elevation data</dt>
                             <dd>
@@ -1106,6 +1111,7 @@
         <script src="keys.js"></script>
         <script src="dist/layers.js"></script>
         <script src="dist/layersConf.js"></script>
+        <script src="dist/turf.min.js"></script>
 
         <!-- "gulp inject" for debugging -->
         <!-- inject:js -->
