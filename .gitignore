@@ -9,3 +9,4 @@ brouter-web*.zip
 yarn-error.log
 package-lock.json
 /brouter-profiles
+/profiles
