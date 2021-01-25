@@ -1,6 +1,6 @@
 {
     "name": "brouter-web",
-    "version": "0.15.0",
+    "version": "0.15.1",
     "description": "Web client for BRouter",
     "main": "js/index.js",
     "scripts": {
@@ -74,13 +74,14 @@
         "mapbbcode": "MapBBCode/mapbbcode#v1.2.0",
         "osmtogeojson": "^3.0.0-beta.4",
         "promise-polyfill": "^8.2.0",
+        "togpx": "^0.5.4",
         "topojson-client": "^3.1.0",
         "url-search-params": "~0.5.0",
         "whatwg-fetch": "^3.5.0"
     },
     "devDependencies": {
         "autoprefixer": "^8.1.0",
-        "browser-sync": "^2.26.13",
+        "browser-sync": "^2.26.14",
         "del": "^1.1.1",
         "eslint": "^7.15.0",
         "eslint-plugin-compat": "^3.3.0",
@@ -265,6 +266,11 @@
         "@turf/turf": {
             "main": [
                 "turf.min.js"
+            ]
+        },
+        "togpx": {
+            "main": [
+                "togpx.js"
             ]
         }
     }

@@ -1,4 +1,5 @@
 BR.CircleGoArea = L.Control.extend({
+    radius: null, // in meters
     circleLayer: null,
     boundaryLayer: null,
     maskRenderer: L.svg({ padding: 2 }),
@@ -8,7 +9,6 @@ BR.CircleGoArea = L.Control.extend({
     statesLoading: false,
 
     options: {
-        radius: 1000, // in meters
         countriesUrl: BR.conf.countriesUrl || 'dist/boundaries/countries.topo.json',
         statesUrl: BR.conf.statesUrl || 'dist/boundaries/germany-states.topo.json',
         overpassBaseUrl: BR.conf.overpassBaseUrl || 'https://overpass-api.de/api/interpreter?data=',
@@ -33,7 +33,6 @@ BR.CircleGoArea = L.Control.extend({
         this.map = map;
         this.circleLayer = L.layerGroup([]).addTo(map);
 
-        var radiusKm = (this.options.radius / 1000).toFixed();
         this.drawButton = L.easyButton({
             states: [
                 {
@@ -43,7 +42,7 @@ BR.CircleGoArea = L.Control.extend({
                         self.draw(true);
                     },
                     title: i18next.t('keyboard.generic-shortcut', {
-                        action: i18next.t('map.draw-circlego-start', { radius: radiusKm }),
+                        action: i18next.t('map.draw-circlego-start'),
                         key: 'I',
                     }),
                 },
@@ -54,7 +53,7 @@ BR.CircleGoArea = L.Control.extend({
                         self.draw(false);
                     },
                     title: i18next.t('keyboard.generic-shortcut', {
-                        action: i18next.t('map.draw-circlego-stop', { radius: radiusKm }),
+                        action: i18next.t('map.draw-circlego-stop'),
                         key: '$t(keyboard.escape)',
                     }),
                 },
@@ -95,12 +94,16 @@ BR.CircleGoArea = L.Control.extend({
             this.routing.draw(false);
             this.pois.draw(false);
             this.map.on('click', this.onMapClick, this);
-            this.map.addLayer(this.countriesMask);
+            if (this.countriesMask) {
+                this.map.addLayer(this.countriesMask);
+            }
             this._unlockOutsideArea();
             L.DomUtil.addClass(this.map.getContainer(), 'circlego-draw-enabled');
         } else {
             this.map.off('click', this.onMapClick, this);
-            this.map.removeLayer(this.countriesMask);
+            if (this.countriesMask && this.map.hasLayer(this.countriesMask)) {
+                this.map.removeLayer(this.countriesMask);
+            }
             this._lockOutsideArea();
             L.DomUtil.removeClass(this.map.getContainer(), 'circlego-draw-enabled');
         }
@@ -180,7 +183,7 @@ BR.CircleGoArea = L.Control.extend({
             },
         }).addTo(this.map);
 
-        var buffer = turf.buffer(geoJson, this.options.radius, { units: 'meters' });
+        var buffer = turf.buffer(geoJson, this.radius, { units: 'meters' });
 
         var ring = turf.polygonToLine(buffer.features[0]);
         if (ring.type !== 'FeatureCollection') {
@@ -259,7 +262,7 @@ BR.CircleGoArea = L.Control.extend({
             var name = country.properties.name;
 
             if (name === 'Germany') {
-                this.options.radius = 15000;
+                this.radius = 15000;
 
                 if (!this.states) {
                     this.marker.setIcon(this.iconSpinner);
@@ -278,13 +281,15 @@ BR.CircleGoArea = L.Control.extend({
                     this._applyStateRules(center);
                 }
             } else if (name === 'Metropolitan France') {
-                this.options.radius = 20000;
+                this.radius = 20000;
                 this._setNogoCircle(center);
             } else {
                 console.error('unhandled country: ' + name);
+                this.radius = null;
             }
         } else {
             // NOOP, no rules implemented for this location
+            this.radius = null;
         }
     },
 
@@ -396,7 +401,7 @@ BR.CircleGoArea = L.Control.extend({
     },
 
     _setNogoCircle: function (center) {
-        var polygon = this.circleToPolygon(center, this.options.radius);
+        var polygon = this.circleToPolygon(center, this.radius);
         this._setNogo(polygon);
         this.setOutsideArea(polygon);
     },
@@ -466,7 +471,7 @@ BR.CircleGoArea = L.Control.extend({
     },
 
     setOptions: function (opts) {
-        this.options.radius = opts.circlego[2];
+        this.radius = opts.circlego[2];
         if (opts.polylines) {
             this.nogoPolylines = L.featureGroup(opts.polylines, BR.NogoAreas.prototype.polylineOptions);
         }
@@ -474,32 +479,7 @@ BR.CircleGoArea = L.Control.extend({
     },
 
     setCircle: function (center, polylines) {
-        var self = this;
-        var icon = (this.icon = L.VectorMarkers.icon({
-            icon: 'home',
-            markerColor: BR.conf.markerColors.circlego,
-        }));
-        this.iconSpinner = L.VectorMarkers.icon({
-            icon: 'spinner',
-            spin: true,
-            markerColor: BR.conf.markerColors.circlego,
-        });
-        var marker = (this.marker = L.marker([center[1], center[0]], {
-            icon: icon,
-            draggable: true,
-            // prevent being on top of route markers
-            zIndexOffset: -500,
-        })
-            .on('dragend', function (e) {
-                self.setNogoRing([e.target.getLatLng().lng, e.target.getLatLng().lat]);
-            })
-            .on('click', function () {
-                var drawing = self.drawButton.state() == 'deactivate-circlego';
-                if (drawing) {
-                    self.circleLayer.removeLayer(marker);
-                    self.setNogoRing(undefined);
-                }
-            }));
+        var marker = (this.marker = this._createMarker(center));
 
         this.clear();
         marker.addTo(this.circleLayer);
@@ -521,6 +501,123 @@ BR.CircleGoArea = L.Control.extend({
             this.setOutsideArea(ring);
         }
         this.draw(false);
+    },
+
+    _createMarker: function (center) {
+        var self = this;
+        var icon = (this.icon = L.VectorMarkers.icon({
+            icon: 'home',
+            markerColor: BR.conf.markerColors.circlego,
+        }));
+        this.iconSpinner = L.VectorMarkers.icon({
+            icon: 'spinner',
+            spin: true,
+            markerColor: BR.conf.markerColors.circlego,
+        });
+
+        var popupContent =
+            '<button id="remove-ringgo-marker" class="btn btn-secondary"><i class="fa fa-trash"></i></button>';
+
+        var marker = L.marker([center[1], center[0]], {
+            icon: icon,
+            draggable: true,
+            // prevent being on top of route markers
+            zIndexOffset: -500,
+        })
+            .bindPopup(popupContent)
+            .on('dragend', function (e) {
+                self.setNogoRing([e.target.getLatLng().lng, e.target.getLatLng().lat]);
+            })
+            .on('click', function () {
+                var drawing = self.drawButton.state() == 'deactivate-circlego';
+                if (drawing) {
+                    self.circleLayer.removeLayer(marker);
+                    self.setNogoRing(undefined);
+                }
+            })
+            .on(
+                'popupopen',
+                function (evt) {
+                    this._onPopupOpen(evt.popup, popupContent);
+                },
+                this
+            )
+            .on('popupclose', this._onPopupClose, this);
+
+        return marker;
+    },
+
+    _onPopupOpen: function (popup, popupContent) {
+        var exportName = '';
+        var html = '<p>';
+        if (this.radius) {
+            if (this.boundaryLayer) {
+                var name = this.boundaryLayer.getLayers()[0].feature.properties.name;
+                exportName += name + ' + ';
+                html += BR.Util.sanitizeHTMLContent(name) + '<br />+ ';
+            }
+            var radiusText = (this.radius / 1000).toFixed();
+            exportName += radiusText + ' km';
+            html += radiusText + '&#8239;km';
+            if (this.nogoPolylines) {
+                html += '</p><p>';
+                html +=
+                    '<a id="ringgo-download-gpx" href="javascript:;" download="radius.gpx">' +
+                    i18next.t('export.format_gpx') +
+                    '</a>';
+                html += '<br />';
+                html +=
+                    '<a id="ringgo-download-geojson" href="javascript:;" download="radius.geojson">' +
+                    i18next.t('export.format_geojson') +
+                    '</a>';
+            }
+        } else {
+            html += i18next.t('map.not-applicable-here');
+        }
+        html += '</p>';
+        popup.setContent(html + popupContent);
+
+        if (this.nogoPolylines) {
+            var link = location.href.replace(/&polylines=[^&]*/, '');
+            var geoJson = this.nogoPolylines.toGeoJSON();
+            var gpx = togpx(geoJson, { metadata: { name: exportName, link: link } });
+            this._setDownloadUrl(gpx, 'application/gpx+xml', 'ringgo-download-gpx');
+            this._setDownloadUrl(
+                JSON.stringify(geoJson, null, 2),
+                'application/vnd.geo+json',
+                'ringgo-download-geojson'
+            );
+        }
+
+        $('#remove-ringgo-marker').on(
+            'click',
+            L.bind(function (e) {
+                e.preventDefault();
+                this.circleLayer.removeLayer(this.marker);
+                this.setNogoRing(undefined);
+            }, this)
+        );
+    },
+
+    _onPopupClose: function (evt) {
+        this._revokeDownloadUrl('ringgo-download-gpx');
+        this._revokeDownloadUrl('ringgo-download-geojson');
+    },
+
+    _setDownloadUrl: function (text, mimeType, elementId) {
+        var blob = new Blob([text], {
+            type: mimeType + ';charset=utf-8',
+        });
+        var objectUrl = URL.createObjectURL(blob);
+        var download = document.getElementById(elementId);
+        download.href = objectUrl;
+    },
+
+    _revokeDownloadUrl: function (elementId) {
+        var download = document.getElementById(elementId);
+        if (download) {
+            URL.revokeObjectURL(download.href);
+        }
     },
 
     _clearLayers: function () {
@@ -548,7 +645,7 @@ BR.CircleGoArea = L.Control.extend({
             return it.getLatLng();
         });
         if (circle && circle.length) {
-            return [circle[0].lng.toFixed(6), circle[0].lat.toFixed(6), this.options.radius].join(',');
+            return [circle[0].lng.toFixed(6), circle[0].lat.toFixed(6), this.radius].join(',');
         } else {
             return null;
         }
