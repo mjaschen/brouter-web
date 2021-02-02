@@ -63,7 +63,17 @@ table.dataTable {
 
 .navbar {
     /* align with leaflet-control */
-    padding: 0.5rem 10px;
+    padding: 0.2rem 10px;
+    font-size: 0.8rem;
+}
+.navbar .dropdown-toggle {
+    font-size:.8rem
+}
+.navbar .dropdown-menu {
+  font-size: 0.9rem;
+}
+.navbar-brand {
+    font-size: 0.9rem;
 }
 .nav-link .fa {
     margin-right: 0.2em;
@@ -71,10 +81,13 @@ table.dataTable {
 .navbar-dark .navbar-toggler {
     background-image: none;
 }
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+}
 
 /* disabled style for "Custom" option, but not for selected items */
 .bootstrap-select.btn-group .dropdown-menu li.disabled:not(.selected) a {
-    color: #777;
+    color: #999;
 }
 
 footer {
