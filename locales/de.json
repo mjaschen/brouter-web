@@ -160,7 +160,7 @@
   "modal": {
     "close": "Schließen"},
   "navbar": {
-    "about": "Über",
+    "about": "Über/Hilfe",
     "alternative": {
       "first": "1. Alternative",
       "original": "Original",
@@ -176,11 +176,24 @@
       "tracks": "Track laden"
     },
     "profile": {
+      "Fastbike-lowtraffic-tertiaries":"Rennrad (sehr wenig Verkehr) ⭐️⭐️⭐️",
+      "fastbike-lowtraffic":"Rennrad (weniger Verkehr) ⭐️",
+      "fastbike": "Rennrad ⭐️",
+
+      "cxb-gravel": "Gravel „CXB“ (mehr offroad) ⭐️⭐️",
+      "Trekking-tracks":"Gravel (schnell) ⭐️⭐️",
+
+      "mtb-zossebart":"MTB „Zossebart“ ⭐️⭐️",
+      "mtb-zossebart-hard":"MTB „Zossebart“ (hart) ⭐️⭐️",
+      "MTB":"MTB standard ⭐",
+      "MTB-light":"MTB leicht ⭐",
+
+      "trekking": "Trekkingrad ⭐⭐",
+
       "car-eco": "Auto (effizient)",
       "car-fast": "Auto (schnell)",
       "car-test": "Auto (Test)",
       "custom": "Benutzerdefiniert",
-      "fastbike": "Rennrad ⭐️",
       "fastbike-asia-pacific": "Rennrad (Asien Pazifik)",
       "hiking-beta": "Wandern (beta)",
       "moped": "Moped",
@@ -188,23 +201,14 @@
       "river": "Fluss",
       "safety": "Sicherste Route",
       "shortest": "Kürzeste Route",
-      "trekking": "Trekkingrad",
       "trekking-ignore-cr": "Trekkingrad (ignoriere Radrouten)",
       "trekking-noferries": "Trekkingrad (keine Fähren)",
       "trekking-nosteps": "Trekkingrad (keine Treppen)",
       "trekking-steep": "Trekkingrad (steil)",
       "vm-forum-liegerad-schnell": "Liegerad (schnell)",
       "vm-forum-velomobil-schnell": "Velomobil (schnell)",
-      "cxb-gravel": "Gravel (CX Berlin) ⭐️⭐️",
-      "MTB":"MTB",
       "MTB-light-wet":"MTB leicht, nass",
-      "MTB-light":"MTB leicht",
       "MTB-wet":"MTB nass",
-      "mtb-zossebart-hard":"MTB Zossebart (hart)",
-      "mtb-zossebart":"MTB Zossebart ⭐️⭐️",
-      "fastbike-lowtraffic":"Rennrad (wenig Verkehr) ⭐️",
-      "Fastbike-lowtraffic-tertiaries":"Rennrad (sehr wenig Verkehr) ⭐️⭐️⭐️",
-      "Trekking-tracks":"Gravel ⭐️⭐️",
       "reroute-zossebart":"Re-Routing (Zossebart)"
     },
     "profile-tooltip": "\n({{key}} Taste zum Umschalten)"

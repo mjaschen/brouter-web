@@ -126,7 +126,7 @@
                     >
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#about"
                             ><span class="fa fa-lg fa-info-circle" aria-hidden="true"></span
-                            ><span data-i18n="navbar.about">About</span></a
+                            ><span data-i18n="navbar.about">About/Help</span></a
                         >
                     </div>
                 </div>
@@ -285,81 +285,82 @@
             <div class="modal-dialog modal-fullscreen-md-down" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" data-i18n="about.title">About</h4>
+                        <h4 class="modal-title">Über BRouter-Web</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p data-i18n="[html]about.description">
-                            Online service of the BRouter routing engine. For the offline Android app and more
-                            information see
-                            <a href="https://brouter.de/" target="_blank">brouter.de</a>.
+                        <p>BRouter-Web ist der perfekte Weg um Bikerouten online zu planen.</p>
+                        <p>
+                            Es gibt eine Sammlung von
+                            <a href="https://www.marcusjaschen.de/blog/2020/brouter-web/#brouter-tipps" target="_blank"
+                                ><strong>Tipps und Tricks in Deutsch</strong></a
+                            >
+                            sowie
+                            <a href="https://www.marcusjaschen.de/blog/2020/tips-for-using-brouter-web/" target="_blank"
+                                >helpful hints and tricks in english</a
+                            >.
                         </p>
-                        <p><i data-i18n="about.contact">Contact:</i></p>
-
-                        <div id="about-contact-language" data-i18n="about.contact-language">
-                            Preferred language is English, as we have both international contributors and users.
-                        </div>
-
+                        <p>
+                            <small><em>Lizenzen und weitere Infos:</em></small>
+                        </p>
                         <ul>
                             <li>
-                                <a href="https://groups.google.com/group/osm-android-bikerouting" target="_blank"
-                                    ><span data-i18n="about.support">General discussions/questions, support</span></a
+                                <small
+                                    >BRouter-Web:
+                                    <a href="https://github.com/nrenner/brouter-web" target="_blank"
+                                        >MIT License</a
+                                    ></small
                                 >
                             </li>
                             <li>
-                                <a href="https://webchat.oftc.net/?channels=#brouter" target="_blank"
-                                    ><span data-i18n="about.chat">Chat with users and developers</span></a
+                                <small
+                                    >BRouter:
+                                    <a href="https://github.com/abrensch/brouter" target="_blank">MIT License</a></small
                                 >
                             </li>
                             <li>
-                                <span data-i18n="about.bug-reports">Bug reports and feature requests:</span>
-                                <ul>
-                                    <li>
-                                        <a href="https://github.com/abrensch/brouter/issues" target="_blank">
-                                            <span data-i18n="about.bug-reports-back"
-                                                >server/backend, routing engine, Android app, profiles, brouter.de
-                                                site</span
-                                            >
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://github.com/nrenner/brouter-web/issues" target="_blank">
-                                            <span data-i18n="about.bug-reports-front">web client/frontend.</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <small
+                                    >OpenStreetMap:
+                                    <a href="https://www.openstreetmap.org/copyright" target="_blank"
+                                        >© OpenStreetMap contributors</a
+                                    ></small
+                                >
                             </li>
                         </ul>
+
                         <p>
-                            <i data-i18n="about.data">Data:</i>
+                            <small><em>Routing-Daten:</em></small>
                         </p>
 
-                        <p data-i18n="[html]about.data-description">
-                            This is based on
-                            <a href="https://www.openstreetmap.org" target="_blank">OpenStreetMap</a>. It is usually
-                            updated daily, see dates of
-                            <a href="https://brouter.de/brouter/segments4/" target="_blank">data files</a>.
+                        <p>
+                            <small
+                                >Die Routingdaten werden aus
+                                <a href="https://www.openstreetmap.org" target="_blank">OpenStreetMap</a> viermal
+                                täglich neu erstellt Das letzte Aktualisierungsdatum kann an den
+                                <a href="https://brouter.m11n.de/segments/" target="_blank">Datendateien</a> abgelesen
+                                werden (Zeitstempel in UTC).</small
+                            >
                         </p>
-                        <p id="aboutLinks" data-i18n="[html]about.details">
-                            <i><a href="{{privacyPolicyUrl}}" target="_blank">Privacy Policy</a></i
-                            >,
-                            <i
-                                ><a href="https://github.com/nrenner/brouter-web#credits-and-licenses" target="_blank"
+                        <p id="aboutLinks">
+                            <small>
+                                <a href="https://www.marcusjaschen.de/datenschutzerklaerung/" target="_blank"
+                                    >Datenschutzerklärung</a
+                                >,
+                                <a href="https://github.com/nrenner/brouter-web#credits-and-licenses" target="_blank"
                                     >Credits</a
-                                ></i
-                            >,
-                            <i
-                                ><a
+                                >,
+                                <a
                                     href="https://github.com/nrenner/brouter-web/blob/master/CHANGELOG.md"
                                     target="_blank"
                                     >Changelog</a
-                                ></i
-                            >
-                            and
-                            <i><a href="https://github.com/nrenner/brouter-web#readme" target="_blank">more info</a></i>
-                            on the client.
+                                >
+                                und
+                                <a href="https://github.com/nrenner/brouter-web#readme" target="_blank"
+                                    >weitere Infos zu BRouter-Web</a
+                                >.
+                            </small>
                         </p>
                     </div>
                     <div class="modal-footer">
