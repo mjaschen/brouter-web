@@ -27,6 +27,7 @@ var jsonConcat = require('gulp-json-concat');
 var rename = require('gulp-rename');
 var browserSync = require('browser-sync');
 var merge = require('merge-stream');
+var babel = require('gulp-babel');
 
 const server = browserSync.create();
 
@@ -35,7 +36,12 @@ var debug = false;
 var paths = {
     // see overrides in package.json
     scriptsConfig: mainNpmFiles()
-        .filter((f) => RegExp('url-search-params/.*\\.js', 'i').test(f))
+        .filter(
+            (f) =>
+                RegExp('url-search-params/.*\\.js', 'i').test(f) ||
+                RegExp('core-js-bundle/.*\\.js', 'i').test(f) ||
+                RegExp('regenerator-runtime/.*\\.js', 'i').test(f)
+        )
         .concat([
             // large lib as extra file for faster parallel loading (*.min.js already excluded from bundle)
             'node_modules/@turf/turf/turf.min.js',
@@ -50,7 +56,9 @@ var paths = {
                 (f) =>
                     RegExp('.*\\.js', 'i').test(f) &&
                     !RegExp('.*\\.min\\.js', 'i').test(f) &&
-                    !RegExp('url-search-params/.*\\.js', 'i').test(f)
+                    !RegExp('url-search-params/.*\\.js', 'i').test(f) &&
+                    !RegExp('core-js-bundle/.*\\.js', 'i').test(f) &&
+                    !RegExp('regenerator-runtime/.*\\.js', 'i').test(f)
             )
         )
         .concat([
@@ -92,7 +100,19 @@ gulp.task('clean', function (cb) {
 // libs that require loading before config.js
 gulp.task('scripts_config', function () {
     // just copy for now
-    return gulp.src(paths.scriptsConfig).pipe(gulp.dest(paths.dest));
+    return gulp
+        .src(paths.scriptsConfig)
+        .pipe(
+            rename(function (path) {
+                if (path.basename === 'minified') {
+                    path.basename = 'core-js-bundle.min';
+                } else if (path.basename === 'runtime') {
+                    path.basename = 'regenerator-runtime';
+                }
+            })
+        )
+        .pipe(replace('//# sourceMappingURL=minified.js.map', ''))
+        .pipe(gulp.dest(paths.dest));
 });
 
 gulp.task('scripts', function () {
@@ -103,6 +123,7 @@ gulp.task('scripts', function () {
         .src(paths.scripts, { base: '.' })
         .pipe(sourcemaps.init())
         .pipe(cached('scripts'))
+        .pipe(gulpif(!debug, babel()))
         .pipe(gulpif(!debug, uglify()))
         .pipe(remember('scripts'))
         .pipe(concat(paths.destName + '.js'))
@@ -210,19 +231,26 @@ var nextVersion;
 var ghToken;
 
 gulp.task('release:init', function (cb) {
+    ghToken = gutil.env.token;
+    if (!ghToken) {
+        return cb(new Error('--token is required (github personal access token'));
+    }
+    if (ghToken.length != 40) {
+        return cb(new Error('--token length must be 40, not ' + ghToken.length));
+    }
+
+    nextVersion = pkg.version;
+
+    if (gutil.env.skipnewtag) {
+        return cb();
+    }
+
     var tag = gutil.env.tag;
     if (!tag) {
         return cb(new Error('--tag is required'));
     }
     if (['major', 'minor', 'patch'].indexOf(tag) < 0) {
         return cb(new Error('--tag must be major, minor or patch'));
-    }
-    ghToken = gutil.env.token;
-    if (!ghToken) {
-        return cb(new Error('--token is required (github personal access token'));
-    }
-    if (ghToken.length != 40) {
-        return cb(new Error('--token length must be 40'));
     }
 
     nextVersion = semver.inc(pkg.version, tag);
@@ -248,11 +276,9 @@ gulp.task('bump:json', function () {
 gulp.task('bump:html', function () {
     return gulp
         .src('./index.html')
-        .pipe(replace(/<sup class="version">(.*)<\/sup>/, '<sup class="version">' + nextVersion + '</sup>'))
+        .pipe(replace(/<sup class="version">(.*)<\/sup>/, '<sup class="version">' + pkg.version + '</sup>'))
         .pipe(gulp.dest('.'));
 });
-
-gulp.task('bump', gulp.series('bump:json', 'bump:html'));
 
 gulp.task('release:commit', function () {
     return gulp.src(['./index.html', './package.json']).pipe(git.commit('release: ' + nextVersion));
@@ -318,6 +344,7 @@ gulp.task(
         'scripts_config',
         'layers_config',
         'layers',
+        'bump:html',
         'scripts',
         'styles',
         'images',
@@ -430,7 +457,7 @@ gulp.task(
     'release',
     gulp.series(
         'release:init',
-        'bump',
+        'bump:json',
         'release:commit',
         'release:tag',
         'release:push',
