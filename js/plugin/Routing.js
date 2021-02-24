@@ -9,7 +9,18 @@ BR.Routing = L.Routing.extend({
         position: 'topright',
         icons: {
             start: L.VectorMarkers.icon({ icon: 'play', markerColor: BR.conf.markerColors.start }),
-            normal: L.VectorMarkers.icon({ icon: 'circle', markerColor: BR.conf.markerColors.via }),
+            normal: L.VectorMarkers.icon(
+                {
+                    icon: 'circle',
+                    markerColor: BR.conf.markerColors.via,
+                    map_pin: 'M8.016 15.984h7.969v-7.969h-7.969v7.969zM12 2.016q-2.063 0-3.867 0.773t-3.188 2.156-2.156 3.188-0.773 3.867 0.773 3.867 2.156 3.188 3.188 2.156 3.867 0.773 3.867-0.773 3.188-2.156 2.156-3.188 0.773-3.867-0.773-3.867-2.156-3.188-3.188-2.156-3.867-0.773v0z',
+                    viewBox: '0 0 24 24',
+                    iconSize: [16, 16],
+                    iconAnchor: [8, 8],
+                    shadowSize: [16, 16],
+
+                }
+            ),
             end: L.VectorMarkers.icon({ icon: 'stop', markerColor: BR.conf.markerColors.stop }),
             draw: false,
             opacity: 1,

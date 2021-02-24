@@ -15,3 +15,7 @@ div.line-mouse-marker {
     color: black;
     background: rgba(255, 255, 255, 0.5);
 }
+
+.vector-marker i {
+    top: 5px;
+}
