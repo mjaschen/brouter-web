@@ -97,6 +97,9 @@ table.dataTable {
     padding: 0.2rem 10px;
     font-size: 0.8rem;
 }
+.navbar.bg-m11n {
+    background: linear-gradient(90deg, #20719d 0, #b51739 100%)!important;
+}
 .navbar .dropdown-toggle {
     font-size:.8rem
 }
@@ -113,7 +116,7 @@ table.dataTable {
     background-image: none;
 }
 .navbar-dark .navbar-nav .nav-link {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 1.0);
 }
 
 /* disabled style for "Custom" option, but not for selected items */
@@ -123,7 +126,6 @@ table.dataTable {
 
 footer {
     flex: none;
-    background-color: #f7f7f9;
 }
 
 #stats-container {
