@@ -299,7 +299,7 @@
     },
     "tab-tooltip": "{{action}}\n({{toggleKey}} key to toggle, {{switchKey}} to switch to next tab)"
   },
-  "title": "BRouter web client",
+  "title": "bikerouter.de",
   "trackasroute": {
     "browse": "Browse",
     "explainpoi": "(show waypoints as POI's)",
