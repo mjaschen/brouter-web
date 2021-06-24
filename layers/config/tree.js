@@ -166,6 +166,7 @@ BR.confLayers.tree = {
             'picnic_site',
             'viewpoint',
             'wilderness_hut',
+            'shelter',
         ]
     }
 };
