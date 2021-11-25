@@ -1,32 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-        <title data-i18n="title">BRouter web client</title>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-        <!-- inject:css -->
-        <link rel="stylesheet" href="dist/brouter-web.css" />
-        <!-- endinject -->
-    </head>
+    <title data-i18n="title">BRouter web client</title>
 
-    <body class="flexcolumn">
-        <nav class="navbar navbar-expand-md navbar-dark bg-m11n">
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#collapsingNavbar"
-                aria-controls="collapsingNavbar"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-            >
+    <!-- inject:css -->
+    <link rel="stylesheet" href="dist/brouter-web.css" />
+    <!-- endinject -->
+</head>
+
+<body class="flexcolumn">
+    <nav class="navbar navbar-expand-md navbar-dark bg-m11n">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar" aria-controls="collapsingNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="fa fa-bars"></span>
             </button>
-            <a class="navbar-brand order-md-last" href="#" data-toggle="modal" data-target="#about"
-                >BRouter-Web <sup class="version">0.16.0</sup></a
+        <a class="navbar-brand order-md-last" href="#" data-toggle="modal" data-target="#about">BRouter-Web <sup class="version">0.16.0</sup></a
             >
             <div class="collapse navbar-collapse" id="collapsingNavbar">
                 <div class="navbar-nav">
@@ -67,34 +59,22 @@
                             <span class="fa fa-lg fa-cloud-download" aria-hidden="true"> </span>
                             <span data-i18n="navbar.export">Export</span>
                         </a>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a
-                            class="nav-link dropdown-toggle"
-                            data-toggle="dropdown"
-                            href="#"
-                            role="button"
-                            id="navbarLoadDropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            data-i18n="[title]navbar.load.tooltip"
-                            data-i18n-options='{
+        </div>
+        <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" id="navbarLoadDropdown" aria-haspopup="true" aria-expanded="false" data-i18n="[title]navbar.load.tooltip" data-i18n-options='{
                                 "tracksAction": "$t(navbar.load.tracks)",
                                 "tracksKey": "O",
                                 "trackAsRouteAction": "$t(trackasroute.title)",
                                 "trackAsRouteKey": "$t(keyboard.shift)+O",
                                 "nogosAction": "$t(navbar.load.nogos)",
                                 "nogosKey": "$t(keyboard.shift)+N"
-                            }'
-                            title="Load route"
-                        >
-                            <span class="fa fa-lg fa-cloud-upload" aria-hidden="true"> </span>
-                            <span data-i18n="navbar.load.title">Load</span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarLoadDropdown">
-                            <div id="navbarLoadTracksContainer">
-                                <a class="dropdown-item" data-i18n="navbar.load.tracks" href="#" id="navbarLoadTracks"
-                                    >Tracks</a
+                            }' title="Load route">
+                <span class="fa fa-lg fa-cloud-upload" aria-hidden="true"> </span>
+                <span data-i18n="navbar.load.title">Load</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarLoadDropdown">
+                <div id="navbarLoadTracksContainer">
+                    <a class="dropdown-item" data-i18n="navbar.load.tracks" href="#" id="navbarLoadTracks">Tracks</a
                                 >
                             </div>
                             <div id="navbarLoadEditTracksContainer">
@@ -163,57 +143,48 @@
                         <dl>
                             <dt data-i18n="credits.brouter">BRouter</dt>
                             <dd data-i18n="[html]credits.brouter-license">
-                                <a target="_blank" href="https://brouter.de/brouter">BRouter</a>
-                                &copy; Arndt Brenschede
-                            </dd>
-                            <dt data-i18n="credits.map-data">Map data</dt>
-                            <dd data-i18n="[html]credits.openstreetmap">
-                                &copy;
-                                <a target="_blank" href="https://www.openstreetmap.org/copyright"
-                                    >OpenStreetMap contributors</a
+                                <a target="_blank" href="https://brouter.de/brouter">BRouter</a> &copy; Arndt Brenschede
+                    </dd>
+                    <dt data-i18n="credits.map-data">Map data</dt>
+                    <dd data-i18n="[html]credits.openstreetmap">
+                        &copy;
+                        <a target="_blank" href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a
                                 >
                                 under
                                 <a target="_blank" href="https://opendatacommons.org/licenses/odbl/">ODbL</a>
-                            </dd>
-                            <dd data-i18n="[html]credits.nominatim">
-                                Search by
-                                <a href="https://wiki.openstreetmap.org/wiki/Nominatim" target="_blank">Nominatim</a>
-                            </dd>
-                            <dd data-i18n="[html]credits.boundaries">
-                                Administrative Boundaries:
-                                <a href="https://osm-boundaries.com" target="_blank">OSM-Boundaries</a>,
-                                <a href="https://overpass-api.de/" class="overpass-url" target="_blank">Overpass API</a>
-                            </dd>
-                            <dd data-i18n="[html]credits.pois">
-                                Locations (POIs):
-                                <a href="https://overpass-api.de/" class="overpass-url" target="_blank">Overpass API</a>
-                            </dd>
-                            <dt data-i18n="credits.elevation-data">Elevation data</dt>
-                            <dd>
-                                <a href="http://srtm.csi.cgiar.org" target="_blank">CGIAR-CSI SRTM</a>
-                            </dd>
-                        </dl>
-                        <h5 data-i18n="credits.map-tiles">Map tiles</h5>
-                        <dl id="credits-maps"></dl>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-i18n="modal.close" data-dismiss="modal">
+                    </dd>
+                    <dd data-i18n="[html]credits.nominatim">
+                        Search by
+                        <a href="https://wiki.openstreetmap.org/wiki/Nominatim" target="_blank">Nominatim</a>
+                    </dd>
+                    <dd data-i18n="[html]credits.boundaries">
+                        Administrative Boundaries:
+                        <a href="https://osm-boundaries.com" target="_blank">OSM-Boundaries</a>,
+                        <a href="https://overpass-api.de/" class="overpass-url" target="_blank">Overpass API</a>
+                    </dd>
+                    <dd data-i18n="[html]credits.pois">
+                        Locations (POIs):
+                        <a href="https://overpass-api.de/" class="overpass-url" target="_blank">Overpass API</a>
+                    </dd>
+                    <dt data-i18n="credits.elevation-data">Elevation data</dt>
+                    <dd>
+                        <a href="http://srtm.csi.cgiar.org" target="_blank">CGIAR-CSI SRTM</a>
+                    </dd>
+                    </dl>
+                    <h5 data-i18n="credits.map-tiles">Map tiles</h5>
+                    <dl id="credits-maps"></dl>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-i18n="modal.close" data-dismiss="modal">
                             Close
                         </button>
-                    </div>
                 </div>
             </div>
         </div>
+        </div>
 
         <!-- Layers modal window -->
-        <div
-            class="modal fade"
-            id="custom_layers"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="Layers window"
-            aria-hidden="true"
-        >
+        <div class="modal fade" id="custom_layers" tabindex="-1" role="dialog" aria-labelledby="Layers window" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-fullscreen-md-down" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -230,8 +201,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="layer_name" data-i18n="layers.custom-layer-url-label"
-                                >Custom layer URL/Query</label
+                            <label for="layer_name" data-i18n="layers.custom-layer-url-label">Custom layer URL/Query</label
                             >
                             <input class="form-control" type="text" id="layer_url" spellcheck="false" wrap="off" />
                             <p class="help-block">
@@ -354,6 +324,9 @@
                         </p>
                         <p id="aboutLinks">
                             <small>
+                                <a href="https://www.marcusjaschen.de/impressum/" target="_blank"
+                                    >Impressum</a
+                                >,
                                 <a href="https://www.marcusjaschen.de/datenschutzerklaerung/" target="_blank"
                                     >Datenschutzerklärung</a
                                 >,
@@ -440,17 +413,17 @@
                         <form name="export" id="exportForm">
                             <div class="form-group row">
                                 <label class="col-form-label col-sm-2" data-i18n="export.trackname">Name</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="trackname" />
-                                    <span id="trackname-message" class="validation-warning"></span>
-                                </div>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="trackname" />
+                                <span id="trackname-message" class="validation-warning"></span>
                             </div>
-                            <fieldset id="export-format" class="form-group">
-                                <div class="row">
-                                    <legend class="col-form-label col-sm-2" data-i18n="export.format">Format</legend>
-                                    <div class="col-sm-10">
-                                        <div class="form-check">
-                                            <label class="form-check-label">
+                        </div>
+                        <fieldset id="export-format" class="form-group">
+                            <div class="row">
+                                <legend class="col-form-label col-sm-2" data-i18n="export.format">Format</legend>
+                                <div class="col-sm-10">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
                                                 <input
                                                     class="form-check-input"
                                                     id="format-gpx"
@@ -461,9 +434,9 @@
                                                 />
                                                 <span data-i18n="export.format_gpx">GPX</span>
                                             </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <label class="form-check-label" for="format-kml">
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="format-kml">
                                                 <input
                                                     class="form-check-input"
                                                     id="format-kml"
@@ -473,9 +446,9 @@
                                                 />
                                                 <span data-i18n="export.format_kml">KML</span>
                                             </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <label class="form-check-label" for="format-geojson">
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="format-geojson">
                                                 <input
                                                     class="form-check-input"
                                                     id="format-geojson"
@@ -485,9 +458,9 @@
                                                 />
                                                 <span data-i18n="export.format_geojson">GeoJSON</span>
                                             </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <label class="form-check-label" for="format-csv">
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="format-csv">
                                                 <input
                                                     class="form-check-input"
                                                     id="format-csv"
@@ -497,16 +470,16 @@
                                                 />
                                                 <span data-i18n="export.format_csv">CSV</span>
                                             </label>
-                                        </div>
                                     </div>
                                 </div>
-                            </fieldset>
-                            <fieldset id="export-includes" class="form-group">
-                                <div class="row">
-                                    <legend class="col-form-label col-sm-2" data-i18n="export.include">Include</legend>
-                                    <div class="col-sm-10">
-                                        <div class="form-check">
-                                            <label class="form-check-label">
+                            </div>
+                        </fieldset>
+                        <fieldset id="export-includes" class="form-group">
+                            <div class="row">
+                                <legend class="col-form-label col-sm-2" data-i18n="export.include">Include</legend>
+                                <div class="col-sm-10">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
                                                 <input
                                                     class="form-check-input"
                                                     id="include-waypoints"
@@ -515,36 +488,20 @@
                                                 />
                                                 <span data-i18n="export.include_waypoints">Waypoints</span>
                                             </label>
-                                        </div>
                                     </div>
                                 </div>
-                            </fieldset>
+                            </div>
+                        </fieldset>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-i18n="modal.close" data-dismiss="modal">
                             Close
                         </button>
-                        <button
-                            type="submit"
-                            class="btn btn-primary"
-                            data-i18n="export.title"
-                            form="exportForm"
-                            id="submitExport"
-                        >
+                        <button type="submit" class="btn btn-primary" data-i18n="export.title" form="exportForm" id="submitExport">
                             Export route
                         </button>
-                        <button
-                                type="submit"
-                                class="btn btn-primary"
-                                data-toggle="modal"
-                                data-target="#qrcode"
-                                data-i18n="export.qrcode"
-                                role="button"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                                id="submitQRCode"
-                        >
+                        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#qrcode" data-i18n="export.qrcode" role="button" aria-haspopup="true" aria-expanded="false" id="submitQRCode">
                             Generate QRCode
                         </button>
                     </div>
@@ -553,14 +510,7 @@
         </div>
 
         <!-- QR Code modal window -->
-        <div
-            class="modal fade"
-            id="qrcode"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="QR Code route window"
-            aria-hidden="true"
-        >
+        <div class="modal fade" id="qrcode" tabindex="-1" role="dialog" aria-labelledby="QR Code route window" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -575,45 +525,24 @@
                         </p>
                         <p id="qrcode-img"></p>
                         <p class="alert alert-danger hide" id="qrcode-msg-too-long" data-i18n="qrcode.msg-too-long">
-                            Cannot create QR Code: Route definition is too long. Removing some waypoints or disabling
-                            the limited go-to zone may help to decrease the route data.
+                            Cannot create QR Code: Route definition is too long. Removing some waypoints or disabling the limited go-to zone may help to decrease the route data.
                         </p>
-                        <p
-                            class="alert alert-danger hide"
-                            id="qrcode-msg-unknown-error"
-                            data-i18n="qrcode.msg-unknown-error"
-                        >
+                        <p class="alert alert-danger hide" id="qrcode-msg-unknown-error" data-i18n="qrcode.msg-unknown-error">
                             Cannot create QR Code: An unknown error occurred. See the browser console for details.
                         </p>
                         <p id="qrcode-buttons">
-                            <button
-                                class="btn btn-sm btn-primary qrcode-size-button"
-                                id="qrcode-create-small"
-                                data-qrcode-size="256"
-                                data-i18n="qrcode.small"
-                            >
+                            <button class="btn btn-sm btn-primary qrcode-size-button" id="qrcode-create-small" data-qrcode-size="256" data-i18n="qrcode.small">
                                 Small
                             </button>
-                            <button
-                                class="btn btn-sm btn-primary qrcode-size-button"
-                                id="qrcode-create-medium"
-                                data-qrcode-size="384"
-                                data-i18n="qrcode.medium"
-                            >
+                            <button class="btn btn-sm btn-primary qrcode-size-button" id="qrcode-create-medium" data-qrcode-size="384" data-i18n="qrcode.medium">
                                 Medium
                             </button>
-                            <button
-                                class="btn btn-sm btn-primary qrcode-size-button"
-                                id="qrcode-create-large"
-                                data-qrcode-size="512"
-                                data-i18n="qrcode.large"
-                            >
+                            <button class="btn btn-sm btn-primary qrcode-size-button" id="qrcode-create-large" data-qrcode-size="512" data-i18n="qrcode.large">
                                 Large
                             </button>
                         </p>
                         <p>
-                            <small data-i18n="qrcode.description-long"
-                                >The QR Code contains a link to the GPX track for the current route. It can be opened by
+                            <small data-i18n="qrcode.description-long">The QR Code contains a link to the GPX track for the current route. It can be opened by
                                 any app which has registered itself as handler for GPX files.</small
                             >
                         </p>
