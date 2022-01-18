@@ -210,7 +210,7 @@ BR.LayersConfig = L.Class.extend({
             new OverpassLayer({
                 overpassFrontend: this.overpassFrontend,
                 query: query,
-                minZoom: 12,
+                minZoom: 11,
                 feature: {
                     title: '{{ tags.name }}',
                     body:
