@@ -14,8 +14,8 @@ BR.confLayers.languageDefaultLayers = [
     '1021' // sputnik.ru
 ];
 
-BR.confLayers.defaultOverlays =  [
-    'HikeBike.HillShading',
+BR.confLayers.defaultOverlays = [
+    // 'HikeBike.HillShading',
     'Waymarked_Trails-Cycling',
     'Waymarked_Trails-Hiking'
 ];
@@ -33,6 +33,6 @@ BR.confLayers.leafletProvidersIncludeList = [
     'Stamen.Terrain',
     'MtbMap',
     'OpenStreetMap.CH',
-    'HikeBike.HillShading',
+    // 'HikeBike.HillShading',
     'Esri.WorldImagery'
 ];
