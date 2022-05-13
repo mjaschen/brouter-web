@@ -19,8 +19,8 @@ BR.RoutingOptions = L.Evented.extend({
             option.value = profiles[i];
             option.text = i18next.t('navbar.profile.' + profiles[i]);
             if (remembered_profile !== null && remembered_profile === profiles[i]) {
-                option.selected = true
-                remembered_profile_was_selected = true
+                option.selected = true;
+                remembered_profile_was_selected = true;
             }
             profiles_list.appendChild(option);
         }
@@ -144,7 +144,7 @@ BR.RoutingOptions = L.Evented.extend({
 
     _getChangeHandler: function () {
         return L.bind(function (evt) {
-            this.rememberProfile(evt.target.options[evt.target.options.selectedIndex].value)
+            this.rememberProfile(evt.target.options[evt.target.options.selectedIndex].value);
             this.fire('update', { options: this.getOptions() });
         }, this);
     },
